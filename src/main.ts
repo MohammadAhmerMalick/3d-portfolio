@@ -9,14 +9,14 @@ import {
   TorusGeometry,
   TextureLoader,
   SphereGeometry,
-  PointLightHelper,
+  // PointLightHelper,
   MeshBasicMaterial,
   PerspectiveCamera,
   MeshStandardMaterial,
+  SRGBColorSpace,
 } from "three"
 
 import "./style.css"
-import { OrbitControls } from "three/examples/jsm/Addons.js"
 
 // scene
 const scene = new Scene()
@@ -24,7 +24,9 @@ const scene = new Scene()
 // camera
 const cameraRation = window.innerWidth / window.innerHeight
 const camera = new PerspectiveCamera(75, cameraRation, 0.1, 1000)
-camera.position.setZ(30)
+camera.position.setX(0)
+camera.position.setY(0)
+camera.position.setZ(0)
 
 // canvas
 const canvas = document.querySelector("#bg")
@@ -51,9 +53,9 @@ if (canvas) {
   scene.add(pointLight, ambientLight)
 
   // helper
-  const lightHelper = new PointLightHelper(pointLight)
-  const orbitControl = new OrbitControls(camera, renderer.domElement)
-  scene.add(lightHelper)
+  // const lightHelper = new PointLightHelper(pointLight)
+  // const orbitControl = new OrbitControls(camera, renderer.domElement)
+  // scene.add(lightHelper)
 
   // add start
   const addStart = () => {
@@ -74,6 +76,7 @@ if (canvas) {
 
   // space texture
   const spaceTexture = new TextureLoader().load("./space.jpg")
+  spaceTexture.colorSpace = SRGBColorSpace
   scene.background = spaceTexture
 
   // logo
@@ -85,35 +88,38 @@ if (canvas) {
   logo.position.z = -5
 
   // moon
+
+  const moonTexture = new TextureLoader().load("./moon.jpg")
+  moonTexture.colorSpace = SRGBColorSpace
+  const moonNormalTexture = new TextureLoader().load("./moon-normal-map.jpg")
+  moonNormalTexture.colorSpace = SRGBColorSpace
+
   const moon = new Mesh(
     new SphereGeometry(3, 32, 32),
     new MeshStandardMaterial({
-      map: new TextureLoader().load("./moon.jpg"),
-      normalMap: new TextureLoader().load("./moon-normal-map.jpg"),
+      map: moonTexture,
+      normalMap: moonNormalTexture,
     })
   )
   scene.add(moon)
-  moon.position.z = 30
-  moon.position.x = -10
+  moon.position.z = 20
+  moon.position.x = -5
 
+  // camera movement
   const moveCamera = () => {
     const t = document.body.getBoundingClientRect().top
-    moon.rotation.x = 0.05
-    moon.rotation.y = 0.05
-    moon.rotation.z = 0.05
+    moon.rotation.x = t * 0.001
+    moon.rotation.z = t * 0.005
 
-    logo.rotation.x = 0.05
-    logo.rotation.y = 0.05
-    logo.rotation.z = 0.05
+    logo.rotation.x = t * 0.005
+    logo.rotation.y = t * 0.005
+    logo.rotation.z = t * 0.005
 
-    camera.position.x = t * -0.002
-    camera.position.y = t * -0.002
-    camera.position.z = t * -0.05
-
-    console.log(camera.position)
+    camera.position.z = t * -0.01
   }
   document.body.onscroll = moveCamera
 
+  // animate loop
   const aniimate = () => {
     torus.rotation.x += 0.01
     torus.rotation.y += 0.005
