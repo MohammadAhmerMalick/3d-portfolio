@@ -1,0 +1,126 @@
+$primaryColor: #febe00;
+
+// resolutions
+$fullWideRes: 1500px;
+$wideRes: 1200px;
+$squareRes: 992px;
+$tabletRes: 768px;
+$mobileRes: 576px;
+
+$transitionDuration: 0.3s;
+
+$borderColor: #eee;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  color: white;
+
+  line-height: 1.5;
+  font-weight: 300;
+  text-decoration: none;
+
+  * {
+    margin: 0;
+    padding: 0;
+
+    line-height: inherit;
+    font-weight: inherit;
+    text-decoration: inherit;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  a {
+    color: $primaryColor;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  main {
+    position: relative;
+
+    @import './components/button';
+
+    .sections {
+      display: grid;
+      gap: 40px;
+
+      margin: auto;
+      padding: 40px;
+
+      max-width: 1000px;
+
+      @media (max-width: $mobileRes) {
+        padding: 20px;
+      }
+
+      .section {
+        padding: 40px;
+
+        border-radius: 4px;
+
+        box-shadow: 0 0 12px 2px rgba($color: #000000, $alpha: 1);
+        backdrop-filter: blur(20px);
+
+        background-color: rgba($color: #000000, $alpha: 0.4);
+
+        overflow: hidden;
+
+        @media (max-width: $mobileRes) {
+          padding: 20px;
+        }
+
+        .heading {
+          position: relative;
+          margin-bottom: 12px;
+
+          font-weight: 500;
+
+          text-transform: uppercase;
+
+          .secondary {
+            color: $primaryColor;
+          }
+        }
+      }
+    }
+
+    .hr {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+
+      width: 100%;
+      height: 1px;
+      max-width: 700px;
+
+      margin-top: 12px;
+
+      background-color: rgba(255, 255, 255, 0.37);
+
+      &::after {
+        content: '';
+
+        height: 7px;
+        width: 7px;
+
+        border-radius: 100%;
+
+        background-color: $primaryColor;
+      }
+    }
+
+    @import './section/about';
+    @import './section/contact';
+    @import './section/experience';
+    @import './section/skill';
+  }
+}

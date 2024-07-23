@@ -14,9 +14,9 @@ import {
   PerspectiveCamera,
   MeshStandardMaterial,
   SRGBColorSpace,
-} from "three"
+} from 'three'
 
-import "./style.css"
+import './style/style.scss'
 
 // scene
 const scene = new Scene()
@@ -29,7 +29,7 @@ camera.position.setY(0)
 camera.position.setZ(0)
 
 // canvas
-const canvas = document.querySelector("#bg")
+const canvas = document.querySelector('#bg')
 
 if (canvas) {
   // renderer
@@ -39,10 +39,7 @@ if (canvas) {
   renderer.render(scene, camera)
 
   // geometry & material
-  const torus = new Mesh(
-    new TorusGeometry(10, 2, 16, 100),
-    new MeshStandardMaterial({ color: 0xff6347 })
-  )
+  const torus = new Mesh(new TorusGeometry(10, 2, 16, 100), new MeshStandardMaterial({ color: 0xff6347 }))
   // scene.add(torus)
 
   // light
@@ -59,10 +56,7 @@ if (canvas) {
 
   // add start
   const addStart = () => {
-    const star = new Mesh(
-      new SphereGeometry(0.1, 34, 34),
-      new MeshStandardMaterial({ color: 0xffffff })
-    )
+    const star = new Mesh(new SphereGeometry(0.05, 34, 34), new MeshStandardMaterial({ color: 0xffffff }))
 
     const [x, y, z] = Array(3)
       .fill(0)
@@ -72,26 +66,23 @@ if (canvas) {
     scene.add(star)
   }
 
-  for (let i = 0; i < 200; i++) addStart()
+  for (let i = 0; i < 1000; i++) addStart()
 
   // space texture
-  const spaceTexture = new TextureLoader().load("./space.jpg")
+  const spaceTexture = new TextureLoader().load('./images/space.jpg')
   spaceTexture.colorSpace = SRGBColorSpace
   scene.background = spaceTexture
 
   // logo
-  const logo = new Mesh(
-    new BoxGeometry(3, 3, 3),
-    new MeshBasicMaterial({ map: new TextureLoader().load("/logo.svg") })
-  )
+  const logo = new Mesh(new BoxGeometry(3, 3, 3), new MeshBasicMaterial({ map: new TextureLoader().load('/logo.svg') }))
   scene.add(logo)
   logo.position.z = -5
 
   // moon
 
-  const moonTexture = new TextureLoader().load("./moon.jpg")
+  const moonTexture = new TextureLoader().load('./images/moon.jpg')
   moonTexture.colorSpace = SRGBColorSpace
-  const moonNormalTexture = new TextureLoader().load("./moon-normal-map.jpg")
+  const moonNormalTexture = new TextureLoader().load('./images/moon-normal-map.jpg')
   moonNormalTexture.colorSpace = SRGBColorSpace
 
   const moon = new Mesh(
