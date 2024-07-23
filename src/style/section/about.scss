@@ -1,0 +1,29 @@
+.section.about {
+  .content {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: auto 300px;
+
+    @media (max-width: $tabletRes) {
+      grid-template-columns: auto;
+    }
+
+    .text {
+      display: grid;
+      gap: 10px;
+    }
+
+    .resume {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      img {
+        width: 100%;
+        max-width: 200px;
+      }
+    }
+  }
+}
