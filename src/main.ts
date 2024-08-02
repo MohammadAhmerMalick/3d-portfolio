@@ -21,8 +21,12 @@ import './style/style.scss'
 // scene
 const scene = new Scene()
 
+// add 56 to the window height to overcome mobile chrome height shifting
+const windowHeight = window.innerHeight + 56
+const windowWidth = window.innerWidth
+
 // camera
-const cameraRation = window.innerWidth / window.innerHeight
+const cameraRation = windowWidth / windowHeight
 const camera = new PerspectiveCamera(75, cameraRation, 0.1, 1000)
 camera.position.setX(0)
 camera.position.setY(0)
@@ -35,7 +39,7 @@ if (canvas) {
   // renderer
   const renderer = new WebGLRenderer({ canvas })
   renderer.setPixelRatio(window.devicePixelRatio)
-  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setSize(windowWidth, windowHeight)
   renderer.render(scene, camera)
 
   // geometry & material
@@ -76,7 +80,7 @@ if (canvas) {
   // logo
   const logo = new Mesh(new BoxGeometry(3, 3, 3), new MeshBasicMaterial({ map: new TextureLoader().load('/logo.svg') }))
   scene.add(logo)
-  logo.position.z = -5
+  logo.position.z = windowWidth < 500 ? -8 : -5
 
   // moon
 
@@ -93,7 +97,7 @@ if (canvas) {
     })
   )
   scene.add(moon)
-  moon.position.z = 20
+  moon.position.z = 16
   moon.position.x = -5
 
   // camera movement

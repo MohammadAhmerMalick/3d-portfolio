@@ -48,9 +48,8 @@
 
     .field {
       display: grid;
-      grid-template:
-        'a b' 40px
-        / 40px auto;
+      grid-template-columns: 40px auto;
+      grid-template-rows: 40px;
 
       .icon {
         display: grid;
