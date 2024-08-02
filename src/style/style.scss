@@ -19,7 +19,6 @@ body {
   padding: 0;
 
   color: white;
-
   line-height: 1.5;
   font-weight: 300;
   text-decoration: none;
@@ -56,7 +55,15 @@ body {
   canvas {
     position: fixed;
     top: 0;
+    bottom: 0;
+    right: 0;
     left: 0;
+
+    width: 100dvw;
+    height: 100dvh;
+
+    background: url('./images/space.jpg');
+    background-size: 100% 100%;
   }
 
   main {
