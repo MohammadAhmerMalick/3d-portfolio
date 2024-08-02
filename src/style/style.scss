@@ -19,10 +19,22 @@ body {
   padding: 0;
 
   color: white;
-
   line-height: 1.5;
   font-weight: 300;
   text-decoration: none;
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #2e284e;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #febe00;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c39200;
+  }
 
   * {
     margin: 0;
@@ -32,6 +44,8 @@ body {
     font-weight: inherit;
     text-decoration: inherit;
     font-family: 'Roboto', sans-serif;
+
+    box-sizing: border-box;
   }
 
   a {
@@ -41,7 +55,15 @@ body {
   canvas {
     position: fixed;
     top: 0;
+    bottom: 0;
+    right: 0;
     left: 0;
+
+    width: 100dvw;
+    height: 100dvh;
+
+    background: url('./images/space.jpg');
+    background-size: 100% 100%;
   }
 
   main {
@@ -56,10 +78,10 @@ body {
       margin: auto;
       padding: 40px;
 
-      max-width: 1000px;
+      max-width: 1400px;
 
       @media (max-width: $mobileRes) {
-        padding: 20px;
+        padding: 10px;
       }
 
       .section {
