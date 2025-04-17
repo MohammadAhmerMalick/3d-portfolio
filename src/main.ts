@@ -15,8 +15,12 @@ import {
   MeshStandardMaterial,
   SRGBColorSpace,
 } from 'three'
+import Lenis from 'lenis'
 
 import './style/style.scss'
+
+// smooth scroll
+new Lenis({ autoRaf: true })
 
 // scene
 const scene = new Scene()
